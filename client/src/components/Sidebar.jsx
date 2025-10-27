@@ -88,6 +88,7 @@ const sidbarItems = [
 ];
 
 const Sidebar = ({
+  user,
   isNonMobile,
   isSidebarOpen,
   setIsSidebarOpen,
@@ -122,8 +123,16 @@ const Sidebar = ({
             },
           }}
         >
-          <Box width={"100%"}>
-            <Box m={" 1.5rem 2rem 2rem 3rem"}>
+          <Box
+            width={"100%"}
+            height={"100%"}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box m={"1.5rem 2rem 2rem 3rem"}>
               <FlexBetween color={colors.secondary.main}>
                 <Box display={"flex"} alignItems={"center"} gap={"0.5rem"}>
                   <Typography variant="h4" fontWeight={"bold"}>
@@ -137,7 +146,23 @@ const Sidebar = ({
                 )}
               </FlexBetween>
             </Box>
-            <List>
+            <Divider />
+            <List
+              sx={{
+                flexGrow: 1,
+                overflowY: "auto",
+                "& .MuiListItemButton-root": {
+                  padding: "8px 32px 8px 24px",
+                },
+                "& .MuiListItemIcon-root": {
+                  minWidth: "0px",
+                  marginRight: "16px",
+                },
+                "& .MuiListItemText-primary": {
+                  fontWeight: "bold",
+                },
+              }}
+            >
               {sidbarItems.map(({ text, icon }) => {
                 if (!icon) {
                   return (
@@ -186,6 +211,42 @@ const Sidebar = ({
                 );
               })}
             </List>
+            <Box>
+              <Divider />
+              <FlexBetween
+                textTransform={"none"}
+                gap={"1rem"}
+                m={"1.5rem 1rem"}
+              >
+                <Box
+                  component={"img"}
+                  alt="profile"
+                  src={profileImage}
+                  height={"40px"}
+                  width={"40px"}
+                  borderRadius={"50%"}
+                  sx={{ objectFit: "cover" }}
+                />
+                <Box textAlign={"left"}>
+                  <Typography
+                    fontWeight={"bold"}
+                    fontSize={"0.9rem"}
+                    sx={{ color: colors.secondary[100] }}
+                  >
+                    {user.name}
+                  </Typography>
+                  <Typography
+                    fontSize={"0.8rem"}
+                    sx={{ color: colors.secondary[200] }}
+                  >
+                    {user.occupation}
+                  </Typography>
+                </Box>
+                <SettingsOutlined
+                  sx={{ color: colors.secondary[300], fontSize: "25px" }}
+                />
+              </FlexBetween>
+            </Box>
           </Box>
         </Drawer>
       )}

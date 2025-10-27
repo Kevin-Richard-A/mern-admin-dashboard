@@ -20,6 +20,7 @@ const RootLayout = () => {
       height={"100%"}
     >
       <Sidebar
+        user={data || {}}
         isNonMobile={isNonMobile}
         drawerWidth={"250px"}
         isSidebarOpen={isSidebarOpen}
